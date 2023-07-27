@@ -64,8 +64,7 @@ abstract class BaseActivity : AppCompatActivity() {
 }
 
 @Keep
-abstract class BaseActivity1<VB : ViewBinding>(private val inflaterCallbacks: (LayoutInflater) -> VB) :
-    BaseActivity() {
+abstract class BaseActivity1<VB : ViewBinding>(private val inflaterCallbacks: (LayoutInflater) -> VB) : BaseActivity() {
     private lateinit var _binding: VB
     protected val binding get() = _binding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,30 +76,4 @@ abstract class BaseActivity1<VB : ViewBinding>(private val inflaterCallbacks: (L
 
 }
 
-@Keep
-abstract class BaseActivity2<VB : ViewBinding, VM : ViewModel>(inflaterCallbacks: (LayoutInflater) -> VB) :
-    BaseActivity1<VB>(inflaterCallbacks) {
-    private lateinit var _viewModel: VM
-    val viewModel get() = _viewModel
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
-        Log.d("baseclass", "onCreate: ${javaClass.genericSuperclass}")
-        val parameterizedType = javaClass.genericSuperclass as ParameterizedType
-
-        @Suppress("UNCHECKED_CAST")
-        val vmClass = parameterizedType.actualTypeArguments.getOrNull(1) as? Class<VM>
-        vmClass?.let {
-            _viewModel = ViewModelProvider(this)[vmClass]
-        }
-    }
-}
-
-@Keep
-abstract class BaseActivity3<VB : ViewBinding, VM : ViewModel, Adapter : RecyclerView.Adapter<*>>(
-    inflaterCallbacks: (LayoutInflater) -> VB
-) :
-    BaseActivity2<VB, VM>(inflaterCallbacks) {
-    @Inject
-    lateinit var adapter: Adapter
-}
