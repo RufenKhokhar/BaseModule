@@ -107,6 +107,11 @@ object NativeAd {
         return when (adType) {
             "1a" -> R.layout.native_1a_placeholder
             "1b" -> R.layout.native_1b_placeholder
+            "1a_no_media" -> R.layout.native_1a_no_media_placeholder
+            "2a" -> R.layout.native_2a_placeholder
+            "2b" -> R.layout.native_2b_placeholder
+            "3a" -> R.layout.native_3a_placeholder
+            "3b" -> R.layout.native_3b_placeholder
             "6a" -> R.layout.native_6a_placeholder
             "6b" -> R.layout.native_6b_placeholder
             "7a" -> R.layout.native_7a_placeholder
@@ -118,7 +123,11 @@ object NativeAd {
     fun getAdViewByType(adType: String): Int {
         return when (adType) {
             "1a" -> R.layout.native_1a
-            "1b" -> R.layout.native_1b
+            "1a_no_media" -> R.layout.native_1a_no_media
+            "2a" -> R.layout.native_2a
+            "2b" -> R.layout.native_2b
+            "3a" -> R.layout.native3a
+            "3b" -> R.layout.native_3b
             "6a" -> R.layout.native_6a
             "6b" -> R.layout.native_6b
             "7a" -> R.layout.native_7a
